@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#09060f">
+<title>LUMIX — Streaming</title>
+<style>
+:root{--bg:#08060e;--panel:#14101f;--purple:#9b5cff;--lav:#d3baff;--muted:#aaa2bb;--line:#ffffff20}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:#f8f5ff;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}button,input{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:9px;padding:10px 14px;background:#1b1528;color:white}button:hover{border-color:#bd91ff;background:#2b1d40}.primary{background:linear-gradient(110deg,#a855f7,#6d28d9);border:0;font-weight:750}.topbar{height:68px;display:flex;align-items:center;gap:25px;padding:0 4%;background:#080610ee;border-bottom:1px solid #ffffff12;position:sticky;top:0;z-index:10;backdrop-filter:blur(12px)}.logo{font-weight:1000;font-size:24px;letter-spacing:2px;white-space:nowrap;text-shadow:0 0 20px #9b5cff80}.logo span{color:#b891ff}.nav{display:flex;gap:20px}.nav a{color:#d8d1e7;text-decoration:none;font-size:14px}.nav a:hover{color:#c4a5ff}.search{flex:1;max-width:350px;margin-left:auto;background:#171222;border:1px solid #ffffff19;border-radius:30px;color:white;padding:11px 16px;min-width:90px}.profile{width:42px;height:42px;border-radius:50%;padding:0;font-size:22px;background:#251a37;border:2px solid #8d5cf5}.hero{min-height:440px;padding:65px 5%;display:flex;align-items:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 78% 48%,#6c3fae70,transparent 27%),radial-gradient(ellipse at 92% 65%,#35235b,transparent 47%),linear-gradient(105deg,#100b19 5%,#100b19d9 45%,#0a0712 100%)}.hero:before{content:"";position:absolute;width:min(40vw,380px);aspect-ratio:1;right:9%;top:13%;border-radius:50%;background:radial-gradient(circle at 31% 27%,#efe7ff,#bca0f4 12%,#68449b 34%,#251a3a 64%,#0a0712 70%);box-shadow:0 0 100px #8b5cf655}.hero:after{content:"";position:absolute;width:min(49vw,480px);aspect-ratio:1;right:5%;top:9%;border:1px solid #d7bfff80;border-radius:50%;transform:rotate(-25deg) scaleY(.32)}.hero-copy{position:relative;z-index:1;max-width:500px}.eyebrow{color:#c5a8ff;letter-spacing:2.5px;font-weight:800;font-size:11px}.hero h1{font-family:Georgia,serif;font-size:clamp(34px,5.4vw,62px);line-height:.99;letter-spacing:3px;margin:15px 0}.meta{color:#d6cee4;font-size:13px;margin:15px 0}.hero p{max-width:430px;color:#d0c8dc;line-height:1.7;font-size:14px}.btns{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}.section{padding:22px 4% 8px}.section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}.section h2{font-size:20px;margin:0}.sub{color:var(--muted);font-size:12px;margin-top:5px}.topten{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;align-items:start}.topten .tile{display:flex;flex-direction:column;min-width:0}.topten .rank{min-height:30px;display:flex;align-items:center;justify-content:flex-start;padding-left:2px}.topten .poster{flex-shrink:0}.tile{position:relative;min-width:0}.rank{display:block;position:relative;z-index:1;margin:0 0 7px 2px;font-size:26px;font-weight:900;font-style:normal;line-height:1;color:#c5a8ff;-webkit-text-stroke:0;text-shadow:none}.poster{width:100%;aspect-ratio:2/3;border-radius:10px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;background:radial-gradient(circle at 45% 30%,var(--c1),var(--c2) 45%,#09070e 85%);border:1px solid #ffffff20;box-shadow:0 8px 22px #0006}.poster:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(0deg,#05040cf5,transparent 68%)}.poster-fallback{background:linear-gradient(155deg,var(--c1),var(--c2) 58%,#08070d)!important}.poster-fallback .poster-title{font-size:clamp(12px,2vw,18px);text-align:center;bottom:18px;left:10px;right:10px;text-shadow:0 2px 9px #000,0 0 14px #000}.poster-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform .35s ease}.poster:hover .poster-art{transform:scale(1.05)}.poster .orb{display:none}.poster .poster-title{position:absolute;z-index:3;bottom:13px;left:8px;right:8px;font-size:clamp(10px,1.5vw,15px);font-weight:900;text-shadow:0 2px 6px black}.poster .badge{position:absolute;z-index:3;top:8px;left:8px;font-size:8px;letter-spacing:1px;background:#07050cbf;padding:5px;border-radius:4px}.tile button{width:100%;padding:0;border:0;background:transparent}.tile .caption{font-size:12px;font-weight:700;margin:8px 0 3px}.tile .small{font-size:10px;color:var(--muted)}.rows{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.filters{display:flex;gap:8px;overflow:auto;margin-bottom:15px}.filter{white-space:nowrap;border-radius:25px;font-size:12px}.filter.active{background:#8b5cf6;border-color:#8b5cf6}.empty{color:var(--muted);padding:25px;text-align:center;border:1px dashed var(--line);border-radius:12px}.player-section{margin:24px 4%;padding:20px;border:1px solid #ffffff1c;border-radius:16px;background:linear-gradient(135deg,#171020,#0d0a13)}.player-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:20px}.screen{aspect-ratio:16/9;border-radius:12px;background:radial-gradient(ellipse at 50% 70%,#604083,transparent 35%),radial-gradient(circle at 50% 32%,#293354,transparent 27%),linear-gradient(145deg,#080916,#1b1025,#05050a);display:grid;place-items:center;position:relative;overflow:hidden;border:1px solid #ffffff20}
+.video-mount{position:absolute;inset:0;display:grid;place-items:center;background:#05040b}.video-mount iframe{width:100%;height:100%;border:0}.video-fallback{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:18px;text-align:center;background:radial-gradient(circle at 50% 25%,#35214f,#09070e 75%)}.video-fallback-title{font-size:clamp(18px,3vw,28px);font-weight:900}.video-fallback p{font-size:13px;color:#d3c9e0;margin:0}.video-fallback a{display:inline-block;color:white;background:#7c3aed;padding:10px 14px;border-radius:8px;text-decoration:none;font-size:13px}
+.screen .planet{width:25%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 30% 25%,#f0e7ff,#a78bfa 24%,#382153 68%,#090611 75%);box-shadow:0 0 55px #a78bfa77}.screen .play{position:absolute;z-index:1;border-radius:50%;width:60px;height:60px;font-size:22px;background:#100b1bcc}.screen .screen-label{position:absolute;bottom:0;left:0;right:0;padding:30px 14px 12px;background:linear-gradient(transparent,#05040df0);font-size:12px}.bar{height:5px;border-radius:9px;background:#ffffff35;margin:13px 0;overflow:hidden;cursor:pointer}.bar div{height:100%;width:0;background:#b58aff}.controls{display:flex;gap:7px;flex-wrap:wrap}.controls button{font-size:12px}.controls .push{flex:1}.license{background:#0c0913;border:1px solid #ffffff16;border-radius:12px;padding:16px;margin-top:15px}.license h3{margin:0 0 8px;font-size:15px}.license p{color:#bdb5cb;font-size:12px;line-height:1.6}.license a{color:#c7aaff}.video-link{display:flex;gap:10px;align-items:center;padding:10px 0;border-top:1px solid #ffffff13}.yt{background:#ff0033;border-radius:7px;padding:8px 10px;font-size:12px;font-weight:900}.video-link a{color:#f3eaff;text-decoration:none;font-size:12px}.video-link small{display:block;color:var(--muted);margin-top:3px}.profile-row{display:flex;gap:10px;flex-wrap:wrap}.profile-option{font-size:29px;width:55px;height:55px;padding:0;border-radius:50%;background:#1d162b}.profile-option.selected{border:2px solid #b68aff;box-shadow:0 0 20px #8b5cf655}
+.avatar-groups{display:flex;flex-direction:column;gap:18px;margin:12px 0 18px;max-height:48vh;overflow:auto;padding:3px 3px 12px}
+.avatar-franchise{border-top:1px solid #ffffff17;padding-top:12px}
+.avatar-franchise h3{font-size:13px;letter-spacing:.03em;color:#d9c5ff;margin:0 0 10px;font-weight:800}
+.avatar-strip{display:flex;gap:10px;overflow-x:auto;padding:3px 2px 9px;scroll-snap-type:x proximity}
+.character-choice{flex:0 0 76px;width:76px;border:1px solid #ffffff1c;background:#21182e;border-radius:13px;padding:7px 5px;display:flex;flex-direction:column;align-items:center;gap:6px;color:#f5efff;scroll-snap-align:start}
+.character-choice.selected{border:2px solid #c4a2ff;box-shadow:0 0 18px #8b5cf655;background:#322044}
+.character-face{width:49px;height:49px;border-radius:50%;display:grid;place-items:center;font-size:19px;font-weight:900;color:white;border:2px solid #ffffff45;box-shadow:inset 0 -8px 14px #0005,0 4px 12px #0004}
+.character-name{font-size:10px;line-height:1.15;text-align:center;max-width:68px;white-space:normal}
+@media(max-width:560px){.avatar-groups{max-height:44vh}.character-choice{flex-basis:69px;width:69px}.character-face{width:44px;height:44px}}
+.modal-back{position:fixed;inset:0;background:#05040af2;z-index:30;display:none;overflow:auto;padding:20px}.modal-back.show{display:block}.modal{max-width:650px;margin:6vh auto;background:#130f1d;border:1px solid var(--line);border-radius:17px;padding:22px}.modal-head{display:flex;justify-content:space-between;align-items:center}.field{width:100%;margin:7px 0 14px;padding:12px;border:1px solid var(--line);background:#0d0a14;color:white;border-radius:9px}.notice{font-size:11px;color:var(--muted);line-height:1.6}.footer{border-top:1px solid var(--line);padding:25px 4%;color:#91899f;font-size:11px;line-height:1.7;margin-top:30px}
+@media(max-width:700px){.topbar{gap:12px;padding:0 3%;height:60px}.nav{gap:10px}.nav a{font-size:12px}.nav a:nth-child(3){display:none}.logo{font-size:19px}.search{max-width:160px;padding:9px 12px}.hero{min-height:390px;padding:42px 6%}.hero:before{right:-10%;top:18%;width:58vw;opacity:.6}.hero:after{right:-14%;top:14%;width:70vw}.hero-copy{max-width:85%}.hero p{font-size:13px}.topten{grid-template-columns:repeat(5,minmax(105px,1fr));overflow-x:auto;padding:0 5px 10px}.rows{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.player-layout{grid-template-columns:1fr}.section{padding-left:4%;padding-right:4%}.rank{font-size:24px;position:relative;left:auto;top:auto;margin:0 0 7px 2px;line-height:1;color:#c5a8ff;-webkit-text-stroke:0;text-shadow:none}.player-section{margin:20px 3%;padding:13px}}@media(max-width:420px){.nav a:nth-child(2){display:none}.search{max-width:115px}.rows{grid-template-columns:repeat(2,minmax(0,1fr))}.hero h1{font-size:37px}}
+
+/* LUMIX mobile streaming redesign */
+:root{--bg:#050507;--panel:#171719;--purple:#a855f7;--line:#ffffff20}
+body{background:#050507;padding-bottom:88px}.topbar{background:#080808ed;border-bottom:0}.logo{color:#fff!important;font-size:25px;letter-spacing:1.5px}.logo span{color:#a855f7}.nav{display:none}.search{border-radius:7px;background:#161616;max-width:245px}.hero{min-height:590px;padding:300px 5% 30px;align-items:flex-end;background:linear-gradient(0deg,#050507 1%,#050507ee 18%,transparent 67%),radial-gradient(ellipse at 55% 15%,#593477,transparent 44%),linear-gradient(135deg,#1b1230,#09090c 65%);}
+.hero:before{width:100%;height:75%;aspect-ratio:auto;right:0;top:0;border-radius:0;background:linear-gradient(0deg,#050507 0%,transparent 45%),var(--hero-image,radial-gradient(circle at 55% 35%,#68449b,#09070e 70%)) center 24%/cover no-repeat;box-shadow:none;opacity:.94}.hero:after{display:none}.hero-carousel-controls button{display:none!important}.hero-carousel-controls{justify-content:flex-start;min-height:18px}.hero-copy{max-width:650px}.eyebrow{font-size:10px;letter-spacing:2px}.hero h1{font-family:inherit;font-size:clamp(30px,7vw,50px);letter-spacing:.3px;font-weight:950;margin:10px 0}.hero p{font-size:14px;line-height:1.5;color:#e0dce4}.btns button{flex:1;min-height:44px;border-radius:5px}.btns .primary{background:#fff;color:#111}.section{padding:20px 4% 8px}.section h2{font-size:19px;font-weight:850}.sub{font-size:11px}.topten{grid-template-columns:repeat(5,minmax(112px,1fr));overflow-x:auto;padding:0 5px 12px;gap:13px}.rows{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.poster{border-radius:6px;aspect-ratio:2/3;padding:0;background-color:#171717;background-image:linear-gradient(0deg,#000c,transparent 50%),var(--poster-bg,none),radial-gradient(circle at 50% 25%,var(--c1),var(--c2) 75%);background-position:center;background-size:cover}.poster:before{background:linear-gradient(0deg,#000e,transparent 65%)}.poster .orb{display:none}.poster .poster-title{font-size:clamp(9px,2.4vw,14px);bottom:9px;text-shadow:0 2px 5px #000}.rank{font-size:24px;margin-bottom:7px;color:#c5a8ff;-webkit-text-stroke:0;left:auto}.tile .caption{font-size:12px}.tile .small{font-size:10px}.tile button:not(.poster){border-radius:5px}.filters{padding-bottom:3px}.filter{border-radius:22px;background:#262626}.filter.active{background:#fff;color:#111;border-color:#fff}.player-section{border:0;border-radius:0;background:#111;margin:22px 0;padding:18px 4%}.screen{border-radius:7px}.license{background:#171717}.modal-back{background:#000e;backdrop-filter:blur(8px)}.modal{background:#171719;border-radius:15px}.profile-option{border-radius:12px}.footer{padding-bottom:30px}
+.bottom-nav{position:fixed;z-index:25;bottom:8px;left:5%;right:5%;height:68px;border:1px solid #ffffff20;border-radius:36px;background:#242426f5;box-shadow:0 8px 30px #000b;display:flex;align-items:center;justify-content:space-around;padding:5px 8px;backdrop-filter:blur(18px)}.bottom-nav button{background:transparent;border:0;color:#aaa;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:58px;padding:7px 8px;font-size:10px;font-weight:700}.bottom-nav button .ico{font-size:22px;line-height:1.1}.bottom-nav button.active{color:#fff;background:#39393b;border-radius:28px;min-width:72px}.bottom-nav button.active .ico{color:#fff}
+@media(min-width:701px){body{padding-bottom:0}.hero{min-height:560px;padding:70px 5%}.hero:before{width:68%;height:100%;right:0;top:0;background:linear-gradient(90deg,#050507 0%,transparent 75%),linear-gradient(0deg,#050507 0%,transparent 35%),var(--hero-image,radial-gradient(circle at 55% 35%,#68449b,#09070e 70%)) center 25%/cover no-repeat}.bottom-nav{display:none}.nav{display:flex}.rows{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(max-width:420px){.topbar{gap:8px}.logo{font-size:19px}.search{max-width:none;min-width:0;width:100%;font-size:12px}.profile{flex-shrink:0}.hero{min-height:550px;padding-top:270px}.hero h1{font-size:32px}.rows{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.tile .caption{font-size:10px}.tile .small{font-size:9px}.tile button:not(.poster){font-size:10px!important;padding:7px 3px!important}}
+
+
+/* LUMIX brand refresh */
+:root{--brand:#a855f7;--brand2:#6d28d9}
+.logo,.brand-logo,.wordmark{color:#c084fc!important;letter-spacing:.14em}
+.brand-mark,.logo-mark{background:linear-gradient(135deg,#c084fc,#6d28d9)!important;color:#09060f!important;border-radius:10px!important}
+button.active,.nav button.active,.bottom-nav button.active{color:#c084fc!important}
+button:focus-visible,input:focus-visible{outline:2px solid #a855f7;outline-offset:3px}
+
+
+/* LUMIX Liquid Glass — visual finish only; existing layout preserved */
+:root{--glass-edge:rgba(255,255,255,.22);--glass-bg:rgba(255,255,255,.075);--glass-highlight:rgba(255,255,255,.12)}
+.bottom-nav,.bottom-nav-bar,.floating-nav,.profile-modal,.modal,.dialog,.player-controls{
+  background:linear-gradient(135deg,rgba(255,255,255,.13),rgba(255,255,255,.035))!important;
+  border:1px solid var(--glass-edge)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 12px 36px rgba(0,0,0,.34)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(165%);
+  backdrop-filter:blur(24px) saturate(165%);
+}
+button,.poster,.chip,.category-pill,.profile-card{
+  transition:transform .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+button:not(:disabled){-webkit-tap-highlight-color:transparent}
+button:active,.poster:active{transform:scale(.975)}
+input,select,.search-box{
+  background:rgba(255,255,255,.065)!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  -webkit-backdrop-filter:blur(16px);
+  backdrop-filter:blur(16px);
+}
+.poster{overflow:hidden}
+.bottom-nav button.active{
+  background:linear-gradient(135deg,rgba(192,132,252,.20),rgba(139,92,246,.08))!important;
+  border:1px solid rgba(192,132,252,.25)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 22px rgba(168,85,247,.10)!important;
+  border-radius:18px;
+}
+@media(prefers-reduced-motion:reduce){button,.poster{transition:none!important}}
+
+
+/* Minimal LUMIX monogram */
+.brand-logo::before,.logo::before,.wordmark::before{
+ content:"L";display:inline-flex;align-items:center;justify-content:center;
+ width:1.18em;height:1.18em;margin-right:.38em;border-radius:.28em;
+ color:#100719;background:linear-gradient(145deg,#e9d5ff,#9333ea 68%,#6d28d9);
+ font-weight:900;letter-spacing:-.06em;box-shadow:0 0 18px rgba(168,85,247,.26);
+}
+
+
+/* LUMIX logo + intro/profile experience */
+.lumix-wordmark{display:flex;align-items:center;gap:9px!important;text-decoration:none}
+.lumix-symbol{display:inline-flex;align-items:center;justify-content:center;width:32px;height:34px;border-radius:8px;background:linear-gradient(145deg,#e9d5ff,#a855f7 60%,#6d28d9);color:#100719!important;font-size:25px;font-weight:1000;line-height:1;box-shadow:0 0 20px #a855f755}
+.lumix-name{font-weight:1000;letter-spacing:3px;background:linear-gradient(90deg,#f3e8ff,#c084fc,#8b5cf6);-webkit-background-clip:text;background-clip:text;color:transparent!important;text-shadow:none!important}
+.intro-splash{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;background:#05030a;transition:opacity .65s ease,visibility .65s ease}
+.intro-splash.done{opacity:0;visibility:hidden;pointer-events:none}
+.intro-logo{display:flex;align-items:center;gap:14px;color:#f3e8ff;font-weight:1000;letter-spacing:.22em;font-size:clamp(28px,7vw,54px);animation:lumixReveal 2.2s cubic-bezier(.2,.8,.2,1) both}
+.intro-logo .intro-L{display:grid;place-items:center;width:1.15em;height:1.15em;border-radius:.2em;background:linear-gradient(145deg,#f3e8ff,#a855f7 65%,#6d28d9);color:#100719;box-shadow:0 0 42px #a855f799}
+@keyframes lumixReveal{0%{opacity:0;transform:scale(.48);filter:blur(9px)}22%{opacity:1;transform:scale(1);filter:blur(0)}62%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.75);filter:blur(3px)}}
+.account-screen{position:fixed;inset:0;z-index:900;display:none;align-items:center;justify-content:center;flex-direction:column;gap:22px;padding:28px;background:radial-gradient(ellipse at 50% 0%,#3c205d 0%,#100a19 45%,#05040a 100%);overflow:auto}
+.account-screen.show{display:flex}
+.account-screen h2{font-size:clamp(25px,5vw,36px);margin:0;text-align:center}
+.account-list{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;max-width:680px}
+.account-card{width:110px;background:transparent!important;border:0!important;display:flex;flex-direction:column;align-items:center;gap:9px;padding:8px!important}
+.account-avatar{display:grid;place-items:center;width:88px;height:88px;border-radius:18px;background:linear-gradient(145deg,#2a1b3d,#161020);border:1px solid #ffffff25;font-size:42px;box-shadow:0 8px 26px #0008}
+.account-card strong{font-size:14px}
+.account-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.account-actions button{border-radius:9px;padding:12px 20px;background:rgba(255,255,255,.08);backdrop-filter:blur(16px)}
+.kids-badge{font-size:10px;background:#ec4899;color:white;border-radius:5px;padding:3px 5px}
+body.adult-mode .hero{background:radial-gradient(ellipse at 78% 45%,#ef444470,transparent 30%),linear-gradient(105deg,#17080b,#09070e)}
+body.adult-mode .eyebrow{color:#fca5a5}
+.settings-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:14px 0}
+.settings-row label{font-weight:650}
+#editAccountModal .field{width:100%;margin:6px 0 14px;background:#100b18;color:white;border:1px solid #ffffff24;border-radius:9px;padding:12px}
+body.light-mode{--bg:#f3effa;--panel:#fff;--muted:#62576f;--line:#26183b24;background:#f3effa;color:#21152e}
+body.light-mode .topbar{background:#f5f0fcf2;border-bottom-color:#26183b20}
+body.light-mode .nav a{color:#392a4d}
+body.light-mode .section h2,body.light-mode .caption{color:#21152e}
+body.light-mode .search,body.light-mode .field{background:#fff!important;color:#21152e!important;border-color:#26183b24!important}
+body.light-mode .player-section{background:linear-gradient(135deg,#fff,#eee5fa);color:#21152e}
+body.light-mode .hero{filter:saturate(.9)}
+@media(prefers-reduced-motion:reduce){.intro-logo .intro-L,.intro-logo .intro-word,.intro-splash:after,.intro-splash:before{animation:none;opacity:1;transform:none}.intro-splash{transition:none}}
+
+.hero{transition:opacity .25s ease,background .5s ease}.hero:before{background-image:linear-gradient(0deg,#050507 0%,transparent 58%),var(--hero-image,radial-gradient(circle at 60% 32%,#68449b,#09070e 70%)),radial-gradient(circle at 60% 32%,#68449b,#09070e 70%);background-position:center,center 24%,center;background-size:cover,cover,cover;background-repeat:no-repeat}
+.hero-copy{position:relative;z-index:2}
+.hero-carousel-controls{position:absolute;right:4%;bottom:20px;z-index:3;display:flex;align-items:center;gap:14px;color:#d8b4fe;font-size:12px}
+.hero-carousel-controls button{width:38px;height:38px;border-radius:50%;font-size:26px;padding:0;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(16px)}
+.hero.slide-out .hero-copy{animation:heroOut .38s ease both}
+.hero.slide-in .hero-copy{animation:heroIn .55s ease both}
+@keyframes heroOut{to{opacity:0;transform:translateX(-45px)}}
+@keyframes heroIn{from{opacity:0;transform:translateX(65px)}to{opacity:1;transform:translateX(0)}}
+body.kids-mode .hero{background:radial-gradient(ellipse at 78% 45%,#f9a8d480,transparent 30%),radial-gradient(ellipse at 92% 65%,#7c3aed,transparent 48%),linear-gradient(105deg,#251044 5%,#20113b 48%,#090713 100%)}
+body.kids-mode .hero:before{background:linear-gradient(0deg,#050507 0%,transparent 55%),var(--hero-image,radial-gradient(circle at 31% 27%,#fff7ed,#f9a8d4 15%,#a78bfa 42%,#4c1d95 70%)) center 24%/cover no-repeat,radial-gradient(circle at 31% 27%,#fff7ed,#f9a8d4 15%,#a78bfa 42%,#4c1d95 70%)}
+</style>
+</head>
+<body>
+
+<div class="intro-splash" id="introSplash" aria-label="LUMIX carregando"><div class="intro-logo"><span class="intro-L">L</span><span class="intro-word">LUMIX</span></div></div>
+<div class="account-screen" id="accountScreen">
+  <div class="intro-logo" style="font-size:24px"><span class="intro-L" style="animation:none;transform:none"><span>L</span></span><span class="intro-word" style="animation:none;opacity:1;transform:none">LUMIX</span></div>
+  <h2>Quem está assistindo?</h2>
+  <div class="account-list" id="accountList"></div>
+  <div class="account-actions">
+    <button id="addAccountBtn">＋ Adicionar perfil</button>
+    <button id="editAccountsBtn">✎ Editar perfis</button>
+    <button id="enterStreamingBtn" class="primary">Entrar no LUMIX</button>
+  </div>
+</div>
+
+<header class="topbar">
+  <a href="#" class="logo lumix-wordmark" aria-label="LUMIX" style="color:white;text-decoration:none"><span class="lumix-symbol">L</span><span class="lumix-name">LUMIX</span></a>
+  <nav class="nav"><a href="#inicio">Início</a><a href="#catalogo">Filmes</a><a href="#series">Séries</a><a href="#halloween">Halloween</a><a href="#minha-lista">Minha lista</a></nav>
+  <input id="search" class="search" placeholder="⌕ Buscar no LUMIX..." aria-label="Buscar filmes">
+  <button id="profileBtn" class="profile" aria-label="Perfil">🪐</button>
+</header>
+<main id="inicio">
+<section class="hero" id="heroCarousel">
+  <div class="hero-copy">
+    <div class="eyebrow">LUMIX · CINEMA ALÉM DAS ESTRELAS</div>
+    <h1 id="heroTitle">INTERESTELAR</h1>
+    <div class="meta" id="heroMeta">2014 &nbsp; | &nbsp; 2h 49min &nbsp; | &nbsp; Ficção científica</div>
+    <p id="heroDesc">Quando a Terra enfrenta um futuro incerto, uma equipe de exploradores viaja por um buraco de minhoca em busca de um novo lar para a humanidade.</p>
+    <div class="btns"><button class="primary" id="heroWatch">▶ Assistir opções</button><button id="heroList">＋ Minha lista</button><button id="heroInfo">ⓘ Mais informações</button></div><div class="hero-carousel-controls"><button id="heroPrev" aria-label="Filme anterior">‹</button><span id="heroDots">● ○ ○ ○</span><button id="heroNext" aria-label="Próximo filme">›</button></div>
+  </div>
+</section>
+<section class="section">
+  <div class="section-title"><div><h2>🏆 Top 10 da LUMIX</h2><div class="sub">Filmes e séries em destaque na seleção LUMIX.</div></div></div>
+  <div id="topten" class="topten"></div>
+</section>
+<section class="section" id="catalogo">
+  <div class="section-title"><div><h2>Catálogo de filmes</h2><div class="sub">Capas, detalhes e opções oficiais para assistir.</div></div></div>
+  <div class="filters" id="filters"><button class="filter active" data-filter="Todos">Todos</button><button class="filter" data-filter="Séries">Séries</button><button class="filter" data-filter="Terror">🎃 Terror · Halloween</button><button class="filter" data-filter="Ficção científica">Ficção científica</button><button class="filter" data-filter="Aventura">Aventura</button><button class="filter" data-filter="Suspense">👻 Suspense</button><button class="filter" data-filter="Comédia">😂 Comédia</button><button class="filter" data-filter="Animação">🧸 Infantil / Animação</button><button class="filter" data-filter="Drama">Drama</button><button class="filter" data-filter="Favoritos">♡ Minha lista</button></div>
+  <div id="catalog" class="rows"></div><div id="empty" class="empty" hidden>Nenhum filme encontrado. Tente outra busca.</div>
+</section>
+<section class="section" id="halloween">
+  <div class="section-title"><div><h2>🎃 Especial Halloween · Terror</h2><div class="sub">Mistérios, suspense e clássicos para entrar no clima de outubro.</div></div></div>
+  <div id="horrorCatalog" class="rows"></div>
+</section>
+<section class="section" id="series">
+  <div class="section-title"><div><h2>Maratona de séries</h2><div class="sub">Incluindo Stranger Things e The Last of Us.</div></div></div>
+  <div id="seriesCatalog" class="rows"></div>
+</section>
+<section class="player-section" id="player">
+  <div class="section-title"><div><h2 id="playerTitle">Assistir: Interestelar</h2><div class="sub">Onde assistir legalmente e encontrar a versão oficial.</div></div></div>
+  <div class="player-layout">
+    <div>
+      <div class="screen" id="screen"><div id="videoMount" class="video-mount"><div class="planet"></div><div class="screen-label" id="screenStatus">Escolha um título e toque em “Reproduzir trailer”.</div></div></div>
+      <div class="bar" id="progressBar" role="slider" aria-label="Progresso demonstrativo"><div id="progress"></div></div>
+      <div class="controls"><button id="togglePlay">▶ Reproduzir trailer</button><span class="push"></span><button id="fullscreen">⛶ Tela cheia</button></div>
+      <p class="notice">Os trailers são incorporados de canais oficiais quando há um vídeo identificado. O filme completo só pode ser exibido aqui se houver uma fonte autorizada; este protótipo não hospeda filmes.</p>
+    </div>
+    <div>
+      <div class="license"><h3>📜 Licenças e onde assistir</h3><p id="licenseText">O filme é distribuído comercialmente. A disponibilidade muda por país e data; consulte fontes oficiais antes de assistir.</p><div class="video-link"><span class="yt">▶ YouTube</span><div><a id="youtubeLink" href="https://www.youtube.com/results?search_query=Interestelar+trailer+oficial" target="_blank" rel="noopener">Buscar trailer oficial no YouTube ↗</a><small>Link de busca — confirme o canal oficial e a licença.</small></div></div><div class="video-link"><span>🎬</span><div><a id="whereLink" href="https://www.justwatch.com/br" target="_blank" rel="noopener">Consultar serviços disponíveis no Brasil ↗</a><small>Disponibilidade por região pode mudar.</small></div></div><p id="rightsNote">Não temos licença para exibir o filme completo diretamente neste protótipo.</p></div>
+      <div class="license"><h3>Mais sobre o filme</h3><p id="playerDescription">Selecione um título no catálogo para ver informações e links correspondentes.</p><button id="detailsBtn">Mais informações</button></div>
+    </div>
+  </div>
+</section>
+<section class="section" id="continuar"><div class="section-title"><div><h2>▶ Continuar assistindo</h2><div class="sub">Títulos que você abriu recentemente neste perfil.</div></div></div><div id="historyCatalog" class="rows"></div><div id="historyEmpty" class="empty">Você ainda não abriu nenhum título. Escolha um filme ou série para começar.</div></section>
+<section class="section" id="recomendados"><div class="section-title"><div><h2>✦ Recomendados para você</h2><div class="sub">Sugestões baseadas nos gêneros que você explora.</div></div></div><div id="recommendCatalog" class="rows"></div></section>
+<section class="section" id="minha-lista"><div class="section-title"><div><h2>♡ Minha lista</h2><div class="sub">Seus filmes salvos neste navegador.</div></div></div><div id="favorites" class="rows"></div><div id="favEmpty" class="empty">Você ainda não salvou filmes. Toque em “Minha lista” em um título.</div></section>
+<section class="section"><div class="section-title"><div><h2>Seu perfil cósmico</h2><div class="sub">Escolha um avatar de planeta ou espaço — sem signos.</div></div><button id="editProfile">Editar perfil</button></div><div style="display:flex;align-items:center;gap:12px;background:#14101f;border:1px solid var(--line);border-radius:13px;padding:14px"><span id="profileAvatar" style="font-size:35px">🪐</span><div><strong id="profileName">Explorador espacial</strong><div class="sub">Seu universo pessoal</div></div></div></section>
+</main>
+<nav class="bottom-nav" aria-label="Navegação principal">
+<button class="active" data-goto="inicio"><span class="ico">⌂</span><span>Início</span></button>
+<button data-goto="catalogo"><span class="ico">▣</span><span>Catálogo</span></button>
+<button data-goto="catalogo"><span class="ico">⌕</span><span>Pesquisar</span></button>
+<button data-goto="minha-lista"><span class="ico">♡</span><span>Minha lista</span></button>
+<button id="mobileProfile"><span class="ico" id="mobileAvatar">🪐</span><span>Perfil</span></button>
+</nav>
+<footer class="footer">LUMIX · CINEMA ALÉM DAS ESTRELAS<br>Protótipo independente, não afiliado a Netflix, estúdios ou distribuidores. Capas e títulos identificam obras de terceiros; marcas e direitos pertencem aos respectivos titulares. A lista Top 10 é uma seleção editorial de popularidade/avaliação geral, não dados de audiência do LUMIX.</footer>
+
+<div class="modal-back" id="editAccountModal"><div class="modal">
+  <div class="modal-head"><div><div class="eyebrow">PERSONALIZAR CONTA</div><h2>Editar perfil</h2></div><button data-close="editAccountModal">✕</button></div>
+  <label for="accountEditName">Nome do perfil</label><input id="accountEditName" class="field" maxlength="24" placeholder="Meu perfil">
+  <p class="sub">Escolha um personagem por fileira</p><div class="avatar-groups" id="accountEditAvatars"></div>
+  <div class="settings-row"><label for="kidsMode">Modo Kids</label><input id="kidsMode" type="checkbox"></div>
+  <div class="settings-row"><label for="adultMode">Modo +18 · catálogo adulto</label><input id="adultMode" type="checkbox"></div>
+  <p class="notice">O modo +18 é apenas uma configuração demonstrativa de classificação indicativa. Não inclui conteúdo sexual explícito.</p>
+  <div class="settings-row"><label for="themeMode">Aparência do site</label><select id="themeMode" class="field"><option value="dark">Modo escuro</option><option value="light">Modo claro</option></select></div>
+  <button id="saveAccountEdit" class="primary">Salvar alterações</button>
+</div></div>
+
+<div class="modal-back" id="profileModal"><div class="modal"><div class="modal-head"><div><div class="eyebrow">IDENTIDADE CÓSMICA</div><h2>Escolha seu perfil</h2></div><button data-close="profileModal">✕</button></div><label for="profileNameInput">Nome do perfil</label><input id="profileNameInput" class="field" maxlength="24" placeholder="Explorador espacial"><p class="sub">Escolha um personagem por fileira</p><div class="avatar-groups" id="avatarChoices"></div><p class="notice">As escolhas ficam salvas localmente neste navegador quando permitido. Não é um sistema de contas online.</p><button id="saveProfile" class="primary">Salvar perfil</button></div></div>
+<div class="modal-back" id="detailModal"><div class="modal"><div class="modal-head"><div class="eyebrow">DETALHES DO FILME</div><button data-close="detailModal">✕</button></div><h2 id="detailTitle"></h2><p id="detailDescription" style="line-height:1.7;color:#c7bfd4"></p><p class="sub" id="detailMeta"></p><div class="btns"><button id="detailWatch" class="primary">Ver opções oficiais</button><button id="detailFav">♡ Minha lista</button></div></div></div>
+<script>
+const movies=[
+{id:1,title:'Interestelar',year:2014,run:'2h 49min',genre:'Ficção científica',symbol:'🪐',c1:'#d6a36d',c2:'#322047',desc:'Uma equipe de exploradores viaja além do sistema solar em busca de um futuro para a humanidade.',yt:'Interestelar trailer oficial Warner Bros Brasil',url:'https://www.youtube.com/results?search_query=Interestelar+trailer+oficial+Warner+Bros',rating:'Clássico moderno'},
+{id:2,title:'Duna: Parte Dois',year:2024,run:'2h 46min',genre:'Ficção científica',symbol:'🏜️',c1:'#d58a35',c2:'#27170e',desc:'Paul Atreides se une aos Fremen em uma jornada épica no planeta Arrakis.',yt:'Duna Parte Dois trailer oficial Warner Bros',url:'https://www.youtube.com/results?search_query=Duna+Parte+Dois+trailer+oficial+Warner+Bros',rating:'Épico sci-fi'},
+{id:3,title:'A Origem',year:2010,run:'2h 28min',genre:'Ficção científica',symbol:'🌀',c1:'#5875a6',c2:'#171a32',desc:'Um especialista em invadir sonhos recebe uma missão que desafia a fronteira entre sonho e realidade.',yt:'A Origem trailer oficial Warner Bros',url:'https://www.youtube.com/results?search_query=A+Origem+trailer+oficial+Warner+Bros',rating:'Thriller cerebral'},
+{id:4,title:'Matrix',year:1999,run:'2h 16min',genre:'Ficção científica',symbol:'💚',c1:'#3b785e',c2:'#08150f',desc:'Um programador descobre que a realidade cotidiana esconde um sistema extraordinário.',yt:'Matrix trailer oficial Warner Bros',url:'https://www.youtube.com/results?search_query=Matrix+trailer+oficial+Warner+Bros',rating:'Cult sci-fi'},
+{id:5,title:'Avatar: O Caminho da Água',year:2022,run:'3h 12min',genre:'Aventura',symbol:'🌊',c1:'#4fbbdf',c2:'#092c51',desc:'A família Sully busca proteção e encontra novos povos e ecossistemas em Pandora.',yt:'Avatar O Caminho da Água trailer oficial',url:'https://www.youtube.com/results?search_query=Avatar+O+Caminho+da+Agua+trailer+oficial+Disney',rating:'Aventura visual'},
+{id:6,title:'Perdido em Marte',year:2015,run:'2h 24min',genre:'Aventura',symbol:'🔴',c1:'#df7048',c2:'#3a1714',desc:'Um astronauta tenta sobreviver em Marte enquanto equipes na Terra planejam seu resgate.',yt:'Perdido em Marte trailer oficial 20th Century Studios',url:'https://www.youtube.com/results?search_query=Perdido+em+Marte+trailer+oficial+20th+Century+Studios',rating:'Sobrevivência espacial'},
+{id:7,title:'Oppenheimer',year:2023,run:'3h',genre:'Drama',symbol:'☢️',c1:'#ff9d48',c2:'#42180e',desc:'Drama histórico sobre o físico J. Robert Oppenheimer e o desenvolvimento da bomba atômica.',yt:'Oppenheimer trailer oficial Universal Pictures',url:'https://www.youtube.com/results?search_query=Oppenheimer+trailer+oficial+Universal+Pictures',rating:'Drama premiado'},
+{id:8,title:'Gravidade',year:2013,run:'1h 31min',genre:'Ficção científica',symbol:'🛰️',c1:'#a4c8d8',c2:'#192c46',desc:'Dois astronautas lutam para voltar à Terra depois de um acidente em órbita.',yt:'Gravidade trailer oficial Warner Bros',url:'https://www.youtube.com/results?search_query=Gravidade+trailer+oficial+Warner+Bros',rating:'Suspense espacial'},
+{id:9,title:'Jurassic Park',year:1993,run:'2h 07min',genre:'Aventura',symbol:'🦖',c1:'#b4a05c',c2:'#15241b',desc:'Um parque com dinossauros recriados por engenharia genética enfrenta uma falha de segurança.',yt:'Jurassic Park trailer oficial Universal Pictures',url:'https://www.youtube.com/results?search_query=Jurassic+Park+trailer+oficial+Universal+Pictures',rating:'Aventura clássica'},
+{id:10,title:'E.T. — O Extraterrestre',year:1982,run:'1h 55min',genre:'Aventura',symbol:'👽',c1:'#a47ccf',c2:'#1c1333',desc:'Um garoto cria um laço com um visitante extraterrestre que precisa encontrar o caminho de casa.',yt:'ET O Extraterrestre trailer oficial Universal Pictures',url:'https://www.youtube.com/results?search_query=ET+O+Extraterrestre+trailer+oficial+Universal',rating:'Clássico querido'},
+{id:11,title:'2001: Uma Odisseia no Espaço',year:1968,run:'2h 29min',genre:'Ficção científica',symbol:'🌑',c1:'#c3b6a1',c2:'#15151f',desc:'Uma missão espacial enigmática explora a evolução humana e os limites da inteligência artificial.',yt:'2001 Uma Odisseia no Espaço trailer oficial',url:'https://www.youtube.com/results?search_query=2001+Uma+Odisseia+no+Espaco+trailer+oficial',rating:'Marco do gênero'},
+{id:12,title:'O Gigante de Ferro',year:1999,run:'1h 26min',genre:'Aventura',symbol:'🤖',c1:'#6b9bb7',c2:'#101d2c',desc:'Um garoto faz amizade com um robô gigante que caiu do espaço.',yt:'O Gigante de Ferro trailer oficial',url:'https://www.youtube.com/results?search_query=O+Gigante+de+Ferro+trailer+oficial',rating:'Animação adorada'},
+{id:13,title:'Stranger Things',year:2016,run:'5 temporadas',genre:'Séries',symbol:'',c1:'#a51d2d',c2:'#120914',desc:'Um desaparecimento em uma pequena cidade revela experimentos secretos e um mundo sobrenatural.',yt:'Stranger Things trailer oficial Netflix',url:'https://www.youtube.com/results?search_query=Stranger+Things+trailer+oficial+Netflix',rating:'Mistério sobrenatural'},
+{id:14,title:'The Last of Us',year:2023,run:'2 temporadas',genre:'Séries',symbol:'',c1:'#54754d',c2:'#10170f',desc:'Em um mundo devastado por uma pandemia, Joel e Ellie atravessam uma jornada de sobrevivência.',yt:'The Last of Us trailer oficial HBO',url:'https://www.youtube.com/results?search_query=The+Last+of+Us+trailer+oficial+HBO',rating:'Drama pós-apocalíptico'},
+{id:15,title:'Wandinha',year:2022,run:'2 temporadas',genre:'Séries',symbol:'',c1:'#65526f',c2:'#100d14',desc:'Wandinha Addams investiga mistérios em uma escola cheia de segredos.',yt:'Wandinha trailer oficial Netflix',url:'https://www.youtube.com/results?search_query=Wandinha+trailer+oficial+Netflix',rating:'Mistério gótico'},
+{id:16,title:'The Walking Dead',year:2010,run:'11 temporadas',genre:'Séries',symbol:'',c1:'#68685a',c2:'#171710',desc:'Sobreviventes tentam reconstruir suas vidas em um mundo tomado por mortos-vivos.',yt:'The Walking Dead trailer oficial',url:'https://www.youtube.com/results?search_query=The+Walking+Dead+trailer+oficial',rating:'Terror e sobrevivência'},
+{id:17,title:'A Noite dos Mortos-Vivos',year:1968,run:'1h 36min',genre:'Terror',symbol:'',c1:'#8b8b8b',c2:'#141414',desc:'Um grupo busca abrigo enquanto uma ameaça misteriosa se espalha durante a noite.',yt:'A Noite dos Mortos Vivos trailer oficial',url:'https://www.youtube.com/results?search_query=A+Noite+dos+Mortos+Vivos+trailer+oficial',rating:'Clássico do terror'},
+{id:18,title:'Invocação do Mal',year:2013,run:'1h 52min',genre:'Terror',symbol:'',c1:'#76634f',c2:'#120d0b',desc:'Investigadores paranormais ajudam uma família que relata acontecimentos inexplicáveis em sua casa.',yt:'Invocação do Mal trailer oficial Warner Bros',url:'https://www.youtube.com/results?search_query=Invocacao+do+Mal+trailer+oficial+Warner+Bros',rating:'Terror sobrenatural'},
+{id:19,title:'It: A Coisa',year:2017,run:'2h 15min',genre:'Terror',symbol:'',c1:'#a53b38',c2:'#1c1012',desc:'Um grupo de amigos enfrenta uma presença assustadora que retorna à cidade em ciclos.',yt:'It A Coisa trailer oficial Warner Bros',url:'https://www.youtube.com/results?search_query=It+A+Coisa+trailer+oficial+Warner+Bros',rating:'Terror e mistério'},
+{id:20,title:'Pânico',year:1996,run:'1h 51min',genre:'Terror',symbol:'',c1:'#8a292b',c2:'#0b0b0d',desc:'Uma cidade é abalada por uma sequência de mistérios e ligações ameaçadoras.',yt:'Pânico 1996 trailer oficial',url:'https://www.youtube.com/results?search_query=Panico+1996+trailer+oficial',rating:'Suspense slasher'}
+];
+const posterImages={1:'https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg',2:'https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg',3:'https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg',4:'https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg',5:'https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg',6:'https://image.tmdb.org/t/p/w500/5aGhaIHYuQbqlHWvWYqMCnj40y2.jpg',7:'https://image.tmdb.org/t/p/w500/ptpr0kGAckfQkJeJIt8st5dglvd.jpg',8:'https://image.tmdb.org/t/p/w500/kZ2nZw8D681aphje8NJi8EfbL1U.jpg',9:'https://image.tmdb.org/t/p/w500/cg0xVNb5JB6l5xI5xV6l6Z4QWg.jpg',10:'https://image.tmdb.org/t/p/w500/qTE6h6Y2wZKMR4j6j4QjVYj8Q4V.jpg',11:'https://image.tmdb.org/t/p/w500/ve72VxNqjGM69Uky4WTo2bK6rfq.jpg',12:'https://image.tmdb.org/t/p/w500/8iZ8x8j6xYx7X3cQx4M7V9n.jpg',13:'https://image.tmdb.org/t/p/w500/x2LSRK2Cm7Mpyj8B1Lz6VJf3u5.jpg',14:'https://image.tmdb.org/t/p/w500/dmo6TYuuJgaYinXBPjrgG9mB5od.jpg',15:'https://image.tmdb.org/t/p/w500/9PFonBhy4cQy7Jz20NpMygczOkv.jpg',16:'https://image.tmdb.org/t/p/w500/xf9m0Rz1n2W5w6y9bY5q6Yq6y.jpg',17:'https://image.tmdb.org/t/p/w500/4r0h7s9q4Q3Qx7Z9Y6w6Q8Y1X.jpg',18:'https://image.tmdb.org/t/p/w500/wVYREutTvI2tmxr6ujr2hdfgE8.jpg',19:'https://image.tmdb.org/t/p/w500/9E2y5Q7WlCVNEhP5GiVTjhEhx1o.jpg',20:'https://image.tmdb.org/t/p/w500/3O3klyyYpAZBBE4n7IngzTomFZB.jpg'};
+const avatarGroups=[
+ {title:'Stranger Things',items:[['Eleven','EL','#b84a58'],['Dustin','DU','#b77a39'],['Mike','MI','#4266a8'],['Max','MX','#d45d75'],['Lucas','LU','#568b55'],['Will','WI','#8061b1'],['Steve','ST','#b88752']]},
+ {title:'The Last of Us',items:[['Ellie','EL','#547d55'],['Joel','JO','#8d6c4e'],['Abby','AB','#8b7d61'],['Tess','TE','#8a5e48'],['Dina','DI','#9a5b77']]},
+ {title:'Disney e Pixar',items:[['Mickey','MK','#cf334b'],['Minnie','MN','#d64e8c'],['Elsa','EL','#70c5e7'],['Moana','MO','#c47d4a'],['Woody','WO','#c99a49'],['Buzz','BZ','#6aaf82'],['Nemo','NE','#ec7a3c']]},
+ {title:'Marvel',items:[['Homem-Aranha','HA','#bd3448'],['Homem de Ferro','HF','#b95c3e'],['Wanda','WA','#9c3c5e'],['Loki','LO','#56815d'],['Thor','TH','#537ab3'],['Pantera Negra','PN','#5d4d8b']]},
+ {title:'Wandinha',items:[['Wandinha','WA','#6b587f'],['Enid','EN','#c96f9d'],['Mãozinha','MÃ','#ad9b8b'],['Feioso','FE','#627b91']]},
+ {title:'Star Wars',items:[['Grogu','GR','#7fa36b'],['Leia','LE','#d8c6aa'],['Luke','LU','#9fbdce'],['Darth Vader','DV','#42404d'],['Ahsoka','AH','#c67b6d']]},
+ {title:'LUMIX Originals',items:[['Cosmos','🪐','#7452a8'],['Lua','🌙','#596c9e'],['Estrela','✦','#bd8d43'],['Nebulosa','✧','#a35fba'] ]}
+];
+const avatarMap=Object.fromEntries(avatarGroups.flatMap(g=>g.items.map(([name,mark,color])=>[name,{mark,color}])));
+const defaultAvatar='Cosmos';
+function avatarMarkup(selected,attr){return avatarGroups.map(g=>`<section class="avatar-franchise"><h3>${g.title}</h3><div class="avatar-strip">${g.items.map(([name,mark,color])=>`<button type="button" class="character-choice ${name===selected?'selected':''}" ${attr}="${name}" aria-label="Avatar ${name}"><span class="character-face" style="background:linear-gradient(145deg,${color},#171020)">${mark}</span><span class="character-name">${name}</span></button>`).join('')}</div></section>`).join('')}
+function avatarSymbol(name){return (avatarMap[name]||avatarMap[defaultAvatar]).mark} 
+let filter='Todos',query='',favorites=new Set(),profile={name:'',avatar:'Cosmos'},chosen='Cosmos',current=movies[0],progress=0,playing=false;
+const $=id=>document.getElementById(id);
+function profileStoreKey(kind){const p=(typeof lumixProfiles!=='undefined'&&lumixProfiles[activeProfileIndex])||profile||{};return 'lumix-'+kind+'-'+String(p.name||'principal').toLowerCase().replace(/[^a-z0-9]+/g,'-')}
+function save(){try{localStorage.setItem(profileStoreKey('favorites'),JSON.stringify([...favorites]));localStorage.setItem('jx-profile',JSON.stringify(profile));if(typeof lumixProfiles!=='undefined'&&lumixProfiles[activeProfileIndex]){lumixProfiles[activeProfileIndex].favorites=[...favorites];localStorage.setItem('lumixProfiles',JSON.stringify(lumixProfiles))}}catch(e){}}
+function load(){try{profile=JSON.parse(localStorage.getItem('jx-profile')||'null')||profile;const p=(typeof lumixProfiles!=='undefined'&&lumixProfiles[activeProfileIndex])||null;favorites=new Set(JSON.parse(localStorage.getItem(profileStoreKey('favorites'))||JSON.stringify(p?.favorites||JSON.parse(localStorage.getItem('jx-favorites')||'[]'))))}catch(e){favorites=new Set()}}
+function readHistory(){try{return JSON.parse(localStorage.getItem(profileStoreKey('history'))||'[]')}catch(e){return []}}
+function addHistory(m){try{let h=readHistory().filter(x=>x.id!==m.id);h.unshift({id:m.id,title:m.title,at:Date.now()});localStorage.setItem(profileStoreKey('history'),JSON.stringify(h.slice(0,12)))}catch(e){}}
+function poster(m,rank){let img=(lumixInKidsMode()&&typeof lumixKidsPosterImages!=='undefined'?(lumixKidsPosterImages[m.id]||posterImages[m.id]):posterImages[m.id]);return `<button class="poster" style="--c1:${m.c1};--c2:${m.c2};${img?`--poster-bg:url('${img}')`:''}" data-open="${m.id}" aria-label="Detalhes de ${m.title}">${img?`<img class="poster-art" loading="lazy" src="${img}" alt="Capa de ${m.title}" onerror="this.remove();this.parentElement.classList.add('poster-fallback')">`:''}<span class="badge">${m.year}</span><span class="poster-title">${m.title.toUpperCase()}</span></button>`}
+function tile(m,rank){return `<div class="tile">${rank?`<span class="rank">${rank}</span>`:''}${poster(m,rank)}<div class="caption">${m.title}</div><div class="small">${m.year} · ${m.genre}</div><div style="display:flex;gap:5px;margin-top:7px"><button data-watch="${m.id}" style="flex:1;padding:7px 5px;font-size:11px">▶ Opções</button><button data-fav="${m.id}" aria-label="Salvar ${m.title}" style="padding:7px 9px">${favorites.has(m.id)?'♥':'♡'}</button></div></div>`}
+function render(){let source=(typeof lumixCurrentMovies==='function')?lumixCurrentMovies():movies;let list=source.filter(m=>(filter==='Todos'||(filter==='Favoritos'?favorites.has(m.id):m.genre===filter))&&(m.title+' '+m.genre+' '+m.desc).toLowerCase().includes(query));$('catalog').innerHTML=list.map(m=>tile(m)).join('');$('empty').hidden=!!list.length;$('horrorCatalog').innerHTML=source.filter(m=>m.genre==='Terror').map(m=>tile(m)).join('');$('seriesCatalog').innerHTML=source.filter(m=>m.genre==='Séries').map(m=>tile(m)).join('');let fav=source.filter(m=>favorites.has(m.id));$('favorites').innerHTML=fav.map(m=>tile(m)).join('');$('favEmpty').style.display=fav.length?'none':'block';$('topten').innerHTML=source.slice(0,10).map((m,i)=>`<div class="tile"><span class="rank">${String(i+1).padStart(2,'0')}</span>${poster(m,i+1)}<div class="caption">${m.title}</div><div class="small">${m.rating}</div></div>`).join('');if($('historyCatalog')){let h=readHistory().map(x=>source.find(m=>m.id===x.id)).filter(Boolean);$('historyCatalog').innerHTML=h.map(m=>tile(m)).join('');$('historyEmpty').style.display=h.length?'none':'block';let liked=source.filter(m=>favorites.has(m.id));let rec=source.filter(m=>!favorites.has(m.id)&&(liked.length?liked.some(f=>f.genre===m.genre):true)).slice(0,6);$('recommendCatalog').innerHTML=rec.map(m=>tile(m)).join('')}document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('active',b.dataset.filter===filter))}
+function choose(id){const source=(typeof lumixCurrentMovies==='function')?lumixCurrentMovies():movies;current=source.find(m=>m.id===+id)||source[0]||movies[0];addHistory(current);try{render()}catch(e){}$('heroTitle').textContent=current.title.toUpperCase();$('heroMeta').textContent=`${current.year}  |  ${current.run}  |  ${current.genre}`;$('heroDesc').textContent=current.desc;$('playerTitle').textContent='Trailer: '+current.title;$('playerDescription').textContent=current.desc;$('youtubeLink').href=current.url;$('youtubeLink').textContent='Abrir busca do trailer oficial: '+current.title+' ↗';$('licenseText').textContent=`${current.title} (${current.year}). O player incorpora trailers oficiais quando há um vídeo confirmado; nos demais títulos, use o link externo para consultar o trailer.`;$('rightsNote').textContent='O filme completo só pode tocar se for disponibilizado por uma fonte autorizada. Nenhum filme comercial é hospedado por este protótipo.';loadTrailer(current);$('detailTitle').textContent=current.title;$('detailDescription').textContent=current.desc;$('detailMeta').textContent=`${current.year} · ${current.run} · ${current.genre} · ${current.rating}`;$('detailFav').textContent=favorites.has(current.id)?'♥ Remover da minha lista':'♡ Adicionar à minha lista';}
+function openDetail(id){choose(id);$('detailModal').classList.add('show')}
+function openProfile(){$('profileNameInput').value=profile.name||'';chosen=profile.avatar||defaultAvatar;renderAvatars();$('profileModal').classList.add('show')}
+function renderAvatars(){$('avatarChoices').innerHTML=avatarMarkup(chosen,'data-avatar')}
+function syncProfile(){const mark=avatarSymbol(profile.avatar||defaultAvatar);$('profileBtn').textContent=mark;$('profileAvatar').textContent=mark;if($('mobileAvatar'))$('mobileAvatar').textContent=mark;$('profileName').textContent=profile.name||'Explorador espacial'}
+function setPlaying(v){loadTrailer(current,v)}
+const lumixTrailerIds={1:'zSWdZVtXT7E',8:'OiTiKOy59o4',13:'b9EkMc79ZSU'};
+function loadTrailer(film,autoplay=false){const mount=$('videoMount');if(!mount)return;const vid=lumixTrailerIds[film.id];if(autoplay&&vid){mount.innerHTML=`<iframe title="Trailer de ${film.title.replace(/"/g,'')}" src="https://www.youtube-nocookie.com/embed/${vid}?rel=0&autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>`;$('screenStatus').textContent='Trailer carregando…';$('togglePlay').textContent='↻ Recarregar trailer';}else{mount.innerHTML=`<div class="planet"></div><div class="screen-label" id="screenStatus">${film.title} · toque em “Reproduzir trailer” para carregar o vídeo</div>`;$('togglePlay').textContent=vid?'▶ Reproduzir trailer':'▶ Abrir trailer';if(!vid){$('screenStatus').innerHTML=`${film.title} · <a href="${film.url}" target="_blank" rel="noopener" style="color:#d3baff">abrir trailer no YouTube ↗</a>`;}}}
+document.addEventListener('click',e=>{let b=e.target.closest('button');if(!b)return;if(b.dataset.open)openDetail(b.dataset.open);if(b.dataset.watch){choose(b.dataset.watch);$('player').scrollIntoView({behavior:'smooth'})}if(b.dataset.fav){let id=+b.dataset.fav;favorites.has(id)?favorites.delete(id):favorites.add(id);save();render()}if(b.dataset.filter){filter=b.dataset.filter;render()}if(b.dataset.avatar){chosen=b.dataset.avatar;renderAvatars()}
+if(b.dataset.editAvatar){editAvatar=b.dataset.editAvatar;$('accountEditAvatars').innerHTML=avatarMarkup(editAvatar,'data-edit-avatar')}if(b.dataset.close)$ (b.dataset.close).classList.remove('show')});
+$('search').addEventListener('input',e=>{query=e.target.value.toLowerCase().trim();render();$('catalogo').scrollIntoView({behavior:'smooth',block:'start'})});
+$('heroWatch').onclick=()=>$('player').scrollIntoView({behavior:'smooth'});$('heroList').onclick=()=>{favorites.has(current.id)?favorites.delete(current.id):favorites.add(current.id);save();render()};$('heroInfo').onclick=()=>openDetail(current.id);
+$('profileBtn').onclick=openProfile;$('editProfile').onclick=openProfile;$('saveProfile').onclick=()=>{let name=$('profileNameInput').value.trim();if(!name)name='Explorador espacial';profile={name,avatar:chosen};save();syncProfile();$('profileModal').classList.remove('show')};
+$('detailWatch').onclick=()=>{$('detailModal').classList.remove('show');$('player').scrollIntoView({behavior:'smooth'})};$('detailFav').onclick=()=>{favorites.has(current.id)?favorites.delete(current.id):favorites.add(current.id);save();render();$('detailFav').textContent=favorites.has(current.id)?'♥ Remover da minha lista':'♡ Adicionar à minha lista'};
+$('togglePlay').onclick=()=>loadTrailer(current,true);function updateBar(){$('progress').style.width='0%'};
+$('detailsBtn').onclick=()=>openDetail(current.id);$('fullscreen').onclick=()=>{let el=$('screen');if(el.requestFullscreen)el.requestFullscreen().catch(()=>alert('Tela cheia não disponível neste navegador.'));else alert('Tela cheia não disponível neste navegador.')};
+document.querySelectorAll('.modal-back').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show')}));
+document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.bottom-nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');if(b.dataset.goto==='catalogo' && b.querySelector('.ico')?.textContent==='⌕'){$('search').focus();$('catalogo').scrollIntoView({behavior:'smooth',block:'start'});return}$(b.dataset.goto).scrollIntoView({behavior:'smooth',block:'start'})}));$('mobileProfile').onclick=openProfile;$('search').addEventListener('focus',()=>{document.querySelectorAll('.bottom-nav button').forEach(x=>x.classList.remove('active'));document.querySelector('[data-goto="catalogo"]')?.classList.add('active')});$('catalogo').id='catalogo';$('whereLink').href='https://www.justwatch.com/br';
+// A inicialização visual acontece depois que todos os perfis e catálogos forem declarados.
+
+// Featured-title carousel; moves sideways between films.
+const lumixFeaturedIds=[1,2,3,5,8];
+let lumixSlide=0,lumixSlideTimer=null,lumixAnimating=false;
+const lumixKidsMovies=[
+ {id:101,title:'Toy Story',year:1995,run:'1h 21min',genre:'Animação',symbol:'🤠',c1:'#60a5fa',c2:'#f59e0b',desc:'Um brinquedo cowboy e seus amigos vivem aventuras cheias de imaginação.',url:'https://www.youtube.com/results?search_query=Toy+Story+trailer+oficial+Disney',rating:'Animação para toda a família'},
+ {id:102,title:'Procurando Nemo',year:2003,run:'1h 40min',genre:'Animação',symbol:'🐠',c1:'#38bdf8',c2:'#fb923c',desc:'Um peixinho se perde no oceano e seu pai embarca numa aventura para encontrá-lo.',url:'https://www.youtube.com/results?search_query=Procurando+Nemo+trailer+oficial+Disney',rating:'Aventura familiar'},
+ {id:103,title:'Frozen',year:2013,run:'1h 42min',genre:'Animação',symbol:'❄️',c1:'#7dd3fc',c2:'#c4b5fd',desc:'Duas irmãs descobrem a força do amor e da coragem em um reino congelado.',url:'https://www.youtube.com/results?search_query=Frozen+trailer+oficial+Disney',rating:'Fantasia musical'},
+ {id:104,title:'Meu Malvado Favorito',year:2010,run:'1h 35min',genre:'Animação',symbol:'🍌',c1:'#fde047',c2:'#7c3aed',desc:'Um vilão cheio de planos tem sua rotina transformada por três meninas e ajudantes atrapalhados.',url:'https://www.youtube.com/results?search_query=Meu+Malvado+Favorito+trailer+oficial',rating:'Comédia animada'},
+ {id:105,title:'A Era do Gelo',year:2002,run:'1h 21min',genre:'Animação',symbol:'🦣',c1:'#bae6fd',c2:'#64748b',desc:'Um grupo improvável de amigos atravessa paisagens geladas numa aventura divertida.',url:'https://www.youtube.com/results?search_query=A+Era+do+Gelo+trailer+oficial',rating:'Aventura e comédia'},
+ {id:106,title:'Kung Fu Panda',year:2008,run:'1h 32min',genre:'Animação',symbol:'🐼',c1:'#86efac',c2:'#dc2626',desc:'Um panda apaixonado por kung fu descobre que pode ser um herói.',url:'https://www.youtube.com/results?search_query=Kung+Fu+Panda+trailer+oficial',rating:'Ação e comédia'}
+];
+const lumixAdultMovies=[
+ {id:201,title:'Coringa',year:2019,run:'2h 02min',genre:'Drama',symbol:'🃏',c1:'#b91c1c',c2:'#171717',desc:'Um drama psicológico sobre um homem isolado pela sociedade. Classificação indicativa adulta.',url:'https://www.youtube.com/results?search_query=Coringa+2019+trailer+oficial',rating:'Classificação adulta'},
+ {id:202,title:'John Wick',year:2014,run:'1h 41min',genre:'Ação',symbol:'⚡',c1:'#334155',c2:'#111827',desc:'Um ex-assassino volta ao submundo do crime em um thriller de ação.',url:'https://www.youtube.com/results?search_query=John+Wick+trailer+oficial',rating:'Ação intensa'},
+ {id:203,title:'Clube da Luta',year:1999,run:'2h 19min',genre:'Drama',symbol:'🥊',c1:'#9f1239',c2:'#18181b',desc:'Um thriller psicológico sobre identidade, consumo e grupos clandestinos.',url:'https://www.youtube.com/results?search_query=Clube+da+Luta+trailer+oficial',rating:'Thriller psicológico'},
+ {id:204,title:'Ilha do Medo',year:2010,run:'2h 18min',genre:'Suspense',symbol:'🌫️',c1:'#64748b',c2:'#0f172a',desc:'Dois agentes investigam o desaparecimento de uma paciente em uma ilha isolada.',url:'https://www.youtube.com/results?search_query=Ilha+do+Medo+trailer+oficial',rating:'Suspense psicológico'},
+ {id:205,title:'Alien: O Oitavo Passageiro',year:1979,run:'1h 57min',genre:'Terror',symbol:'👾',c1:'#65a30d',c2:'#09090b',desc:'A tripulação de uma nave enfrenta uma ameaça desconhecida no espaço.',url:'https://www.youtube.com/results?search_query=Alien+O+Oitavo+Passageiro+trailer+oficial',rating:'Terror e ficção científica'},
+ {id:206,title:'O Silêncio dos Inocentes',year:1991,run:'1h 58min',genre:'Suspense',symbol:'🦋',c1:'#a16207',c2:'#18181b',desc:'Uma agente do FBI busca ajuda de um criminoso preso para investigar um caso complexo.',url:'https://www.youtube.com/results?search_query=O+Silencio+dos+Inocentes+trailer+oficial',rating:'Suspense adulto'}
+];
+function lumixInKidsMode(){return !!(profile && lumixProfiles && lumixProfiles[activeProfileIndex] && lumixProfiles[activeProfileIndex].kids);}
+function lumixInAdultMode(){return !!(lumixProfiles && lumixProfiles[activeProfileIndex] && lumixProfiles[activeProfileIndex].adult && !lumixInKidsMode());}
+function lumixCurrentMovies(){return lumixInKidsMode()?lumixKidsMovies:(lumixInAdultMode()?lumixAdultMovies:movies);}
+const lumixKidsPosterImages={
+  101:'https://image.tmdb.org/t/p/original/uXDfjJbdP4ijW5hWSBrPrlKpxab.jpg',
+  102:'https://image.tmdb.org/t/p/original/eHuGQ10FUzK1mdOY69wF5pGgEf5.jpg',
+  103:'https://image.tmdb.org/t/p/original/kgwjIb2JDHRhNk13lmSxiClFjVk.jpg',
+  104:'https://image.tmdb.org/t/p/original/6NFfJ6zL7N1h7U5R9K1p1X0q.jpg',
+  105:'https://image.tmdb.org/t/p/original/gLhHHZUzeseRjie3CImGhO1Mt5L.jpg',
+  106:'https://image.tmdb.org/t/p/original/wQ0iV8W5JxJw5j0R4n6q0yQk9vV.jpg'
+};
+function lumixSetHero(id,animate=true){
+ const set=lumixCurrentMovies();
+ const film=set.find(m=>Number(m.id)===Number(id))||set[0];
+ if(!film)return;
+ const hero=$('heroCarousel');
+ const update=()=>{
+   // Update hero directly so normal and Kids catalogs never fight over the selected item.
+   current=film;
+   $('heroTitle').textContent=film.title.toUpperCase();
+   $('heroMeta').textContent=`${film.year} | ${film.run} | ${film.genre}`;
+   $('heroDesc').textContent=film.desc;
+   $('playerTitle').textContent='Trailer: '+film.title;
+   $('playerDescription').textContent=film.desc;
+   $('youtubeLink').href=film.url;
+   $('youtubeLink').textContent='Buscar trailer oficial: '+film.title+' ↗';
+   $('licenseText').textContent=`${film.title} (${film.year}) é uma obra comercial. Este site não detém os direitos de exibição. Use o link de busca para localizar o trailer publicado pelo estúdio/distribuidor oficial.`;
+   $('rightsNote').textContent='Não há licença de transmissão do filme completo neste protótipo. O YouTube pode oferecer trailers, clipes ou filmes completos somente quando disponibilizados pelo titular dos direitos.';
+   loadTrailer(film);
+   $('detailTitle').textContent=film.title;
+   $('detailDescription').textContent=film.desc;
+   $('detailMeta').textContent=`${film.year} · ${film.run} · ${film.genre} · ${film.rating}`;
+   $('detailFav').textContent=favorites.has(film.id)?'♥ Remover da minha lista':'♡ Adicionar à minha lista';
+   const heroImage=lumixInKidsMode()?(lumixKidsPosterImages[film.id]||''): (posterImages[film.id]||'');
+   if(heroImage) hero.style.setProperty('--hero-image',`linear-gradient(0deg,#050507 0%,transparent 70%),url("${heroImage}")`);
+   else hero.style.setProperty('--hero-image',`radial-gradient(circle at 60% 32%,${film.c1},${film.c2} 58%,#09070e 85%)`);
+   hero.style.background=`radial-gradient(ellipse at 78% 48%,${film.c1}88,transparent 30%),radial-gradient(ellipse at 92% 65%,${film.c2}99,transparent 48%),linear-gradient(105deg,#100b19 5%,#100b19dd 48%,#0a0712 100%)`;
+   const ids=lumixInKidsMode()?lumixKidsMovies.map(m=>m.id):(lumixInAdultMode()?lumixAdultMovies.map(m=>m.id):lumixFeaturedIds);
+   $('heroDots').textContent=ids.map((_,i)=>i===lumixSlide?'●':'○').join(' ');
+   hero.classList.remove('slide-out');
+   hero.classList.add('slide-in');
+   setTimeout(()=>hero.classList.remove('slide-in'),560);
+ };
+ if(animate){
+   if(lumixAnimating)return;
+   lumixAnimating=true;
+   hero.classList.remove('slide-in');hero.classList.add('slide-out');
+   setTimeout(()=>{update();lumixAnimating=false},360);
+ }else update();
+}
+function lumixAdvance(dir=1){
+ const ids=lumixInKidsMode()?lumixKidsMovies.map(m=>m.id):(lumixInAdultMode()?lumixAdultMovies.map(m=>m.id):lumixFeaturedIds);
+ if(!ids.length)return;
+ lumixSlide=(lumixSlide+dir+ids.length)%ids.length;
+ lumixSetHero(ids[lumixSlide],true);
+}
+$('heroPrev').onclick=()=>lumixAdvance(-1);$('heroNext').onclick=()=>lumixAdvance(1);
+function lumixStartCarousel(){if(lumixSlideTimer)clearInterval(lumixSlideTimer);lumixSlideTimer=setInterval(()=>{if(document.visibilityState==='visible'&&$('accountScreen')&&!$('accountScreen').classList.contains('show')){try{lumixAdvance(1)}catch(e){console.warn('Carrossel pausado',e)}}},6500)}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&typeof lumixStartCarousel==='function')lumixStartCarousel()});
+
+// LUMIX intro and local profile manager
+let lumixProfiles = [];
+let activeProfileIndex = 0;
+let editAvatar = '🪐';
+try { lumixProfiles = JSON.parse(localStorage.getItem('lumixProfiles') || '[]'); } catch(e) { lumixProfiles=[]; }
+if (!lumixProfiles.length) {
+  lumixProfiles = [{name:profile.name || 'Meu perfil', avatar:profile.avatar || '🪐', kids:false}];
+}
+
+// Inicialização segura: executada só depois da declaração de lumixProfiles.
+try{load();syncProfile();render();choose(1)}catch(err){console.error('LUMIX inicialização segura:',err);try{render()}catch(e){}}
+function persistLumixProfiles(){try{localStorage.setItem('lumixProfiles',JSON.stringify(lumixProfiles));}catch(e){}}
+function renderAccountList(){
+  const list=$('accountList');
+  list.innerHTML=lumixProfiles.map((p,i)=>`<button class="account-card" data-account="${i}"><span class="account-avatar" style="background:linear-gradient(145deg,${(avatarMap[p.avatar||defaultAvatar]||avatarMap[defaultAvatar]).color},#161020)">${avatarSymbol(p.avatar||defaultAvatar)}</span><strong>${escapeHtml(p.name||'Meu perfil')}</strong>${p.kids?'<span class="kids-badge">KIDS</span>':(p.adult?'<span class="kids-badge">+18</span>':'')}</button>`).join('');
+  if(list.innerHTML==='') list.innerHTML='<p>Adicione um perfil para começar.</p>';
+}
+function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function showAccountScreen(){renderAccountList();$('accountScreen').classList.add('show');}
+function hideAccountScreen(){ $('accountScreen').classList.remove('show');lumixStartCarousel(); }
+function openAccountEditor(index){
+  activeProfileIndex = typeof index==='number' ? index : Math.max(0,lumixProfiles.length-1);
+  const p=lumixProfiles[activeProfileIndex]||{name:'',avatar:defaultAvatar,kids:false};
+  $('accountEditName').value=p.name||'';editAvatar=p.avatar||defaultAvatar;$('kidsMode').checked=!!p.kids;$('adultMode').checked=!!p.adult&&!p.kids;
+  $('themeMode').value=document.body.classList.contains('light-mode')?'light':'dark';
+  $('accountEditAvatars').innerHTML=avatarMarkup(editAvatar,'data-edit-avatar');
+  $('editAccountModal').classList.add('show');
+}
+$('accountList').addEventListener('click',e=>{
+ const b=e.target.closest('[data-account]');if(!b)return;
+ const idx=+b.dataset.account;const p=lumixProfiles[idx];if(!p)return;
+ activeProfileIndex=idx;profile={name:p.name,avatar:p.avatar};persistLumixProfiles();load();syncProfile();document.body.classList.toggle('kids-mode',!!p.kids);document.body.classList.toggle('adult-mode',!!p.adult&&!p.kids);filter='Todos';query='';if($('search'))$('search').value='';render();lumixSlide=0;lumixSetHero((p.kids?lumixKidsMovies:(p.adult?lumixAdultMovies:movies))[0].id,false);lumixStartCarousel();hideAccountScreen();
+});
+$('addAccountBtn').onclick=()=>{
+ if(lumixProfiles.length>=6){alert('Você pode criar até 6 perfis neste protótipo.');return;}
+ lumixProfiles.push({name:'Novo perfil',avatar:defaultAvatar,kids:false});persistLumixProfiles();renderAccountList();openAccountEditor(lumixProfiles.length-1);
+};
+$('editAccountsBtn').onclick=()=>openAccountEditor(activeProfileIndex);
+$('enterStreamingBtn').onclick=()=>hideAccountScreen();
+$('accountEditAvatars').addEventListener('click',e=>{
+ const b=e.target.closest('[data-edit-avatar]');if(!b)return;editAvatar=b.dataset.editAvatar;
+ $('accountEditAvatars').innerHTML=avatarMarkup(editAvatar,'data-edit-avatar');
+});
+$('saveAccountEdit').onclick=()=>{
+ const name=$('accountEditName').value.trim()||'Meu perfil';
+ const kids=$('kidsMode').checked;const adult=$('adultMode').checked&&!kids;if(adult&&!confirm('Este perfil ficará marcado como +18. Confirme apenas se a pessoa responsável pela conta autorizou essa classificação.'))return;lumixProfiles[activeProfileIndex]={name,avatar:editAvatar,kids,adult};
+ persistLumixProfiles();
+ if($('themeMode').value==='light')document.body.classList.add('light-mode');else document.body.classList.remove('light-mode');
+ try{localStorage.setItem('lumixTheme',$('themeMode').value)}catch(e){}
+ profile={name,avatar:editAvatar};save();syncProfile();document.body.classList.toggle('kids-mode',!!lumixProfiles[activeProfileIndex].kids);document.body.classList.toggle('adult-mode',!!lumixProfiles[activeProfileIndex].adult&&!lumixProfiles[activeProfileIndex].kids);renderAccountList();render();lumixSlide=0;lumixSetHero((lumixProfiles[activeProfileIndex].kids?lumixKidsMovies:(lumixProfiles[activeProfileIndex].adult?lumixAdultMovies:movies))[0].id,false);$('editAccountModal').classList.remove('show');
+};
+try{if(localStorage.getItem('lumixTheme')==='light')document.body.classList.add('light-mode')}catch(e){}
+// A abertura espera o carregamento inicial e respeita um tempo mínimo para a animação da marca.
+const lumixIntroStartedAt=Date.now();
+let lumixPageReady=document.readyState==='complete';
+window.addEventListener('load',()=>{lumixPageReady=true;finishLumixIntroWhenReady()},{once:true});
+let lumixIntroFinished=false;
+function finishLumixIntroWhenReady(){
+ if(lumixIntroFinished||!lumixPageReady)return;
+ const remaining=Math.max(0,5600-(Date.now()-lumixIntroStartedAt));
+ setTimeout(()=>{
+   if(lumixIntroFinished)return;lumixIntroFinished=true;
+   $('introSplash').classList.add('done');showAccountScreen();lumixSlide=0;lumixSetHero(1,false);lumixStartCarousel();
+ },remaining);
+}
+// Efeitos sonoros curtos gerados localmente (sem arquivos externos).
+let lumixAudioCtx=null;let lumixSoundArmed=false;
+function lumixAudio(){try{if(!lumixAudioCtx)lumixAudioCtx=new(window.AudioContext||window.webkitAudioContext)();if(lumixAudioCtx.state==='suspended')lumixAudioCtx.resume();return lumixAudioCtx}catch(e){return null}}
+function lumixFallSound(){const c=lumixAudio();if(!c)return;const t=c.currentTime;const o=c.createOscillator(),g=c.createGain(),f=c.createBiquadFilter();o.type='sawtooth';o.frequency.setValueAtTime(360,t);o.frequency.exponentialRampToValueAtTime(72,t+.42);f.type='lowpass';f.frequency.setValueAtTime(1100,t);f.frequency.exponentialRampToValueAtTime(180,t+.42);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.075,t+.04);g.gain.exponentialRampToValueAtTime(.0001,t+.46);o.connect(f);f.connect(g);g.connect(c.destination);o.start(t);o.stop(t+.48)}
+function lumixStarSound(){const c=lumixAudio();if(!c)return;const t=c.currentTime;[[880,0,.18],[1320,.09,.25],[1760,.18,.32]].forEach(([hz,delay,dur])=>{const o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.setValueAtTime(hz,t+delay);g.gain.setValueAtTime(.0001,t+delay);g.gain.exponentialRampToValueAtTime(.11,t+delay+.025);g.gain.exponentialRampToValueAtTime(.0001,t+delay+dur);o.connect(g);g.connect(c.destination);o.start(t+delay);o.stop(t+delay+dur+.02)})}
+function lumixIntroSounds(){if(lumixSoundArmed)return;lumixSoundArmed=true;setTimeout(lumixFallSound,600);setTimeout(lumixStarSound,3850)}
+// Tenta tocar na abertura; em navegadores que bloqueiam áudio automático, libera ao primeiro toque/clique.
+lumixIntroSounds();document.addEventListener('pointerdown',()=>{const c=lumixAudio();if(c&&c.state==='running'&&!lumixSoundGestureFallback){lumixSoundGestureFallback=true;lumixFallSound();setTimeout(lumixStarSound,1700)}},{once:true});
+let lumixSoundGestureFallback=false;
+finishLumixIntroWhenReady();
+
+</script>
+
+<script>
+window.addEventListener('error', function(){
+  var note=document.getElementById('lumixErrorNotice');
+  if(!note){note=document.createElement('div');note.id='lumixErrorNotice';note.textContent='Alguns recursos não carregaram. Recarregue a página ou confira sua conexão.';note.style.cssText='position:sticky;top:0;z-index:9999;background:#28183d;color:#fff;padding:12px;text-align:center;font:14px system-ui';document.body.prepend(note);}
+});
+</script>
+
+</body>
+</html>
